@@ -1,33 +1,41 @@
 import './App.css';
+import {books} from './data'
 
-
-const firstBook ={
-  img:'https://m.media-amazon.com/images/I/81W28TNCDFL._AC_UL320_.jpg',
-  author:'René Goscinny',
-  title:'Astérix - Astérix et le Griffon'
-};
-const secondBook ={
-  img:'https://m.media-amazon.com/images/I/81W28TNCDFL._AC_UL320_.jpg',
-  author:'Modou Gueye',
-  title:'La Foret',
-  data:'https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=1511b6482e6a1b80dd0216332982e4a5#'
-};
 
 function App() {
-    
+    const clickHandler=(e)=>{
+      console.log(e);
+      console.log(e.target);
+    };
     const Book = (props)=>{
-      console.log(props);
-    return <article className="membre">
-    <img src={props.img} alt=""/>
-      <h1>{props.title}</h1>
-      <h5>{props.author} </h5>
+      const {img,title,author} = props.book;
+    return <article className="membre" onMouseOver={()=>{console.log(title)}} >
+    <img src={img} alt=""/>
+      <h1>{title}</h1>
+      <h5>{author} </h5>
+      <button type="button" onClick={()=>{console.log(title)}}>test button</button>
+      <button type="button" onClick={clickHandler}>test click handle</button>
+
     </article>;
   };
  
   return (
     <section className="memberList">
-       <Book img={firstBook.img} title={firstBook.title} author={firstBook.author} />
-       <Book img={secondBook.img} title={secondBook.title} author={secondBook.author} />
+      {books.map((book)=>{
+        // const {img, author, title} = book;
+        console.log(book);
+        return <Book key={book.id} book={book}></Book>;
+      })}
+
+
+       {/* <Book img={firstBook.img} title={firstBook.title} author={firstBook.author}>
+         <p>Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à 
+           titre provisoire pour calibrer une mise en page, le texte définitif venant
+            remplacer le faux-texte dès qu'il est prêt ou
+          </p>
+       </Book>
+       <Book img={secondBook.img} title={secondBook.title} author={secondBook.author} /> */}
+
 
 
 
